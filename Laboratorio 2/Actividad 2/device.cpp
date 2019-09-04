@@ -1,71 +1,29 @@
-#include <stdbool.h>
-#include <stdint.h>
 #include "fnqueue.h"
 #include "critical.h"
+#include "device.h"
 
-/*DEVICE.H*/
-/*
- * 
- * strcut callbackstr{
- *    void (*callbackup)()
- *    voice(*callbackdown)();
- * }
- * keyupcallback(handler,tecla);
- * keydowncallback(hanlder,tecla);
- * teclado.setup();
- * teclado.loop();
- * 
- * 
- * key up callback y la key down callback (handler,tecla)
- * setup(){
- *  inicializar el adc
- * }
- * loop(){
- * que puede ir o no
- * }
- * 
- * DEVICE.CPP
- * 
- * struct callbackstr teclascallback[5]((((num teclas)))))
- * keyupcallback(handler,tecla)
- * 
- * 
- * key downcallback(handler, tecla)
- * 
- * ISR(adc_vect){
- *    fnqueue.add(procesar_adc())
- * }
- * 
- * procesar_adc(){
- *  keyteclas=setkey(key)
- *  if (key!=oldkey){
- *    if (keyteclas>=0){
- *      teclascallback[key].callbackkeydown():
- *    }
- *    else{
- *      teclascallback[oldkey].callbackup();
- *    }
- *  }
- * }
- * 
- *  y especificar las funciones declaradas en el .h
- * 
- * 
- * 
- */
+#define NUMERO_TECLAS 5
 
 
-
-
-
-/*
-void ISR_boton_up()
+struct callbackstr teclas_callback[NUMERO_TECLAS];
+//Rutinas que asocian rutinas keyup y keydown a cada boton
+void key_down_callback(void (*handler)(),int tecla)
 {
-    fnqueue_add(void (*function)(void)) 
+    if(tecla>=0 || tecla<5) teclas_callback[tecla].callbackDOWN=handler;
+}
+void key_up_callback(void (*handler)(), int tecla)
+{
+	if(tecla>=0 || tecla<5) teclas_callback[tecla].callbackUP=handler;
 }
 
-void rutina_boton_up()
+//Inicia el conversor analogico digital
+void teclado_setup()
 {
-    
+
 }
-*/
+void teclado_loop()
+{
+
+
+}
+
