@@ -5,7 +5,7 @@ struct callbackstr
 {
     void (*callbackUP)();
     void (*callbackDOWN)();
-}
+};
 //Rutinas que asocian rutinas keyup y keydown a cada boton
 void key_down_callback(void (*handler)(),int tecla);
 void key_up_callback(void (*handler)(), int tecla);

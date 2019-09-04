@@ -52,6 +52,6 @@ void procesar_adc()
 void ISR()
 {
 	key=adc_key_in;
-	fnqueue.add(procesar_adc());
+	fnqueue_add(procesar_adc);
 }
 
