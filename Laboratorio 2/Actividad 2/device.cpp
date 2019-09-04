@@ -1,8 +1,15 @@
 #include "fnqueue.h"
 #include "critical.h"
 #include "device.h"
+#include <stdint.h>
 
 #define NUMERO_TECLAS 5
+
+uint16_t adc_key_in;
+uint16_t key=-1;
+uint16_t oldkey=-1;
+uint16_t keyTeclas=-1;
+
 
 
 struct callbackstr teclas_callback[NUMERO_TECLAS];
@@ -25,5 +32,26 @@ void teclado_loop()
 {
 
 
+}
+uint16_t get_key(uint16_t k)
+{
+
+    return 0;
+}
+void procesar_adc()
+{
+    keyTeclas=get_key(key);
+    if(key!=oldkey)
+    {
+        if(keyTeclas>=0)teclas_callback[key].callbackDOWN();
+        else teclas_callback[key].callbackUP();
+    }
+
+
+}
+void ISR()
+{
+	key=adc_key_in;
+	fnqueue.add(procesar_adc());
 }
 
