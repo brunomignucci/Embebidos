@@ -74,9 +74,9 @@ void setup()
     lcd.print("Interrupciones");
 
     //Inicializacion de la cola de funciones
-    fnqueue.init();
+    fnqueue_init();
     //Inicializacion del driver de teclado
-    teclado.setup();
+    teclado_setup();
     //Asocio funciones de callback a cada tecla
     key_up_callback(up_keyup,TECLA_UP);
     key_down_callback(down_keyup,TECLA_UP);
