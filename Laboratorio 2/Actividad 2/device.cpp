@@ -16,7 +16,7 @@ uint16_t keyTeclas=-1;
 // Iniciar variables. 
 volatile boolean readFlag = false; 
 // Valor leído volatile 
-int analogVal; 
+//int analogVal; 
 void enviardato();
 
 struct callbackstr teclas_callback[NUMERO_TECLAS];
@@ -117,6 +117,10 @@ void procesar_adc()
         if(keyTeclas>=0)
 			teclas_callback[key].callbackDOWN();
         else
+			/*
+				va a entrar si vale -1, y vale -1 si input de get_key()	es mayor a 760 --> Cuando se suelta
+				el boton el ADC devuelve un valor mayor a 760?
+			*/
 			teclas_callback[key].callbackUP();
     }
 
