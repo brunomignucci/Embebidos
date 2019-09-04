@@ -14,10 +14,10 @@ uint16_t keyTeclas=-1;
 
 
 // Iniciar variables. 
-volatile boolean readFlag = false; 
+//volatile boolean readFlag = false; 
 // Valor leído volatile 
 //int analogVal; 
-void enviardato();
+//void enviardato();
 
 struct callbackstr teclas_callback[NUMERO_TECLAS];
 
@@ -78,6 +78,7 @@ void setup()
 		fnqueue_add(procesar_adc);
 	} 
 	*/
+	
 	//esto lo puedo descomentar si quiero y sacar el cola_add de la ISR y trabajar con flags
 }
 
