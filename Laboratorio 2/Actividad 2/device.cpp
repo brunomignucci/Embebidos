@@ -5,10 +5,13 @@
 
 #define NUMERO_TECLAS 5
 
+uint16_t adc_key_val[5] ={30, 150, 360, 535, 760 };
 uint16_t adc_key_in;
 uint16_t key=-1;
 uint16_t oldkey=-1;
 uint16_t keyTeclas=-1;
+
+
 
 // Iniciar variables. 
 volatile boolean readFlag = false; 
