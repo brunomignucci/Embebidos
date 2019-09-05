@@ -2,6 +2,7 @@
 #include "critical.h"
 #include "device.h"
 #include <stdint.h>
+#include <avr/interrupt.h>
 
 #define NUMERO_TECLAS 5
 
@@ -34,7 +35,7 @@ void key_up_callback(void (*handler)(), int tecla)
 }
 
 //Inicia el conversor analogico digital
-void setup()
+void teclado_setup()
 {	
     // 1. Suspender interrupciones. 
     cli();
@@ -58,7 +59,7 @@ void setup()
 	// habilito las interrupciones
 	sei(); 
 	ADCSRA |= (1 << ADSC); 
-	pinMode(13, OUTPUT); 
+	//pinMode(13, OUTPUT); 
 	// Configurar puerto serial para recibir datos a la tasa de muestreo. 
 	//Serial.begin(2000000); /*velocidad maxima para que no interfiera con otros procesos*/ 
 	/*
@@ -68,7 +69,7 @@ void setup()
 	*/
 }
 
- void loop() 
+ void teclado_loop() 
 {
 	/*
 	// Si hay un dato lo voy a procesar
@@ -100,11 +101,11 @@ uint16_t get_key(unsigned int input)
 {
 	// a mi entender esto no cambia
     uint16_t k;
-    for (k = 0; k < NUM_KEYS; k++)
+    for (k = 0; k < NUMERO_TECLAS; k++)
         if (input < adc_key_val[k])
             return k;
 
-    if (k >= NUM_KEYS)
+    if (k >= NUMERO_TECLAS)
         k = -1;     // No valid key pressed
 
     return k;
@@ -128,7 +129,7 @@ void procesar_adc()
 
 }
 
-void ISR(){
+ISR(ADC_vect){
 	TIFR0 |= (1 << OCF0A);
 	// Bajar la bandera del disparo por timer0. 
 	//readFlag = true;
